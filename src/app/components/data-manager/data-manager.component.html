@@ -1,0 +1,67 @@
+
+<button class="btn btn-outline-primary mb-2" (click)="createPolicy()">Create new policy</button>
+<button class="btn btn-outline-danger mb-2 move" (click)="checkExpiringPolicies()">Check expiring policies</button>
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="policy_number">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Policy Number</th>
+      <td mat-cell *matCellDef="let policy">{{ policy.policy_number }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="customer_name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Customer Name </th>
+      <td mat-cell *matCellDef="let policy"> {{ policy.customer_name }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="policy_type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Policy Type </th>
+      <td mat-cell *matCellDef="let policy"> {{ policy.policy_type }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+      <td mat-cell *matCellDef="let policy"> {{ policy.status }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="premium_amount">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Premium Amount </th>
+      <td mat-cell *matCellDef="let policy"> Ghs{{ policy.premium_amount }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="start_date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </th>
+      <td mat-cell *matCellDef="let policy"> {{ policy.start_date }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="end_date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> End Date </th>
+      <td mat-cell *matCellDef="let policy"> {{ policy.end_date }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+      <td mat-cell *matCellDef="let policy">
+        <i class="text-primary bi-pencil finger" (click)="updatePolicy(policy)"></i>
+        <i class="text-danger bi-trash finger m-lg-1" (click)="deletePolicy(policy)"></i>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+    </tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" aria-label="Select page of users"></mat-paginator>
+
+</div>
+
