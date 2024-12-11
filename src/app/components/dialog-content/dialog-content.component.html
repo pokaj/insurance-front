@@ -1,0 +1,53 @@
+<h1 mat-dialog-title>
+  {{data.id ? 'Update Policy' : 'Create Policy'}}
+</h1>
+<div mat-dialog-content>
+
+  <mat-form-field appearance="fill" class="w-100">
+    <label for="policy_number" class="form-label">Policy Number</label>
+    <input matInput [(ngModel)]="policy.policy_number" id="policy_number" name="policy_number">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-100">
+    <label for="customer_name" class="form-label">Customer Name</label>
+    <input matInput [(ngModel)]="policy.customer_name" id="customer_name" name="customer_name">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-100">
+    <label for="policy_type" class="form-label">Policy Type</label>
+    <mat-select [(ngModel)]="policy.policy_type" id="policy_type" name="policy_type">
+      <mat-option *ngFor="let type of policyTypes" [value]="type">{{type}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-100">
+    <label for="status" class="form-label">Status</label>
+    <mat-select [(ngModel)]="policy.status" id="status" name="status">
+      <mat-option *ngFor="let stat of status" [value]="stat">{{stat}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-100">
+    <label for="premium_amount" class="form-label">Premium Amount</label>
+    <input matInput [(ngModel)]="policy.premium_amount" id="premium_amount" name="premium_amount">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-100">
+    <label for="start_date" class="form-label">Start Date</label>
+    <input matInput [(ngModel)]="policy.start_date" id="start_date" name="start_date" [matDatepicker]="startDatePicker">
+    <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #startDatePicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-100">
+    <label for="end_date" class="form-label">End Date</label>
+    <input matInput [(ngModel)]="policy.end_date" id="end_date" name="end_date" [matDatepicker]="endDatePicker">
+    <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #endDatePicker></mat-datepicker>
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button (click)="savePolicy()">Save</button>
+</div>
